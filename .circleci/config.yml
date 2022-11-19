@@ -19,8 +19,11 @@ jobs:
           command: "echo Hello, World!"
 
   my-job:
-    executor: my-executor
+    docker:
+      - image: cimg/base:stable
+
     steps:
+      - checkout
       - run: echo "Hello executor!"
 
 # Invoke jobs via workflows
@@ -29,3 +32,4 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - my-job
